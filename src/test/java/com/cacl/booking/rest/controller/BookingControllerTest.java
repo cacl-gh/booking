@@ -31,7 +31,7 @@ public class BookingControllerTest {
 
     @Test
     public void shouldCallAdapterAndService() {
-        TicketModel ticketModel = mock(TicketModel.class);
+        final TicketModel ticketModel = mock(TicketModel.class);
         when(ticketAdapter.fromRequest(ticketRequest)).thenReturn(ticketModel);
         bookingController.bookTicket(ticketRequest);
         verify(ticketAdapter).fromRequest(ticketRequest);
@@ -40,13 +40,13 @@ public class BookingControllerTest {
 
     @Test
     public void shouldThrowApiExceptionIfAdapterThrowsAnyException() {
-        when(ticketAdapter.fromRequest(ticketRequest)).thenThrow(new InvalidDataException("1008", "Incorrect format"));
+        when(ticketAdapter.fromRequest(ticketRequest)).thenThrow(new InvalidDataException("1002", "Incorrect format"));
         Assertions.assertThrows(ApiException.class, () -> bookingController.bookTicket(ticketRequest));
     }
 
     @Test
     public void shouldThrowApiExceptionIfServiceThrowsAnyException() {
-        TicketModel ticketModel = mock(TicketModel.class);
+        final TicketModel ticketModel = mock(TicketModel.class);
         when(ticketAdapter.fromRequest(ticketRequest)).thenReturn(ticketModel);
         doThrow(new RuntimeException("Unexpected exception")).when(bookingService).bookTicket(ticketModel);
         Assertions.assertThrows(ApiException.class, () -> bookingController.bookTicket(ticketRequest));

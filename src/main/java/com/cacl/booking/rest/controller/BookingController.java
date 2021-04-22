@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class BookingController {
 
-    private BookingService bookingService;
-    private TicketAdapter ticketAdapter;
+    private final BookingService bookingService;
+    private final TicketAdapter ticketAdapter;
 
     @Autowired
-    public BookingController(BookingService bookingService, TicketAdapter ticketAdapter) {
+    public BookingController(final BookingService bookingService, final TicketAdapter ticketAdapter) {
         this.bookingService = bookingService;
         this.ticketAdapter = ticketAdapter;
     }
 
     @PostMapping(value = "/")
-    public void bookTicket(TicketRequest ticketRequest) {
+    public void bookTicket(final TicketRequest ticketRequest) {
         try {
             bookingService.bookTicket(ticketAdapter.fromRequest(ticketRequest));
         } catch (InvalidDataException e) {

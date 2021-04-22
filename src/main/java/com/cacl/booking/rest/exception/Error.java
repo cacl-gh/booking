@@ -6,7 +6,8 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum Error {
     INTERNAL_ERROR("0001", HttpStatus.INTERNAL_SERVER_ERROR),
-    INVALID_DATA("1001", HttpStatus.BAD_REQUEST);
+    MISSING_REQUIRED("1001", HttpStatus.BAD_REQUEST),
+    INCORRECT_FORMAT("1002", HttpStatus.BAD_REQUEST);
 
     private static final String PREFIX = "BK";
 

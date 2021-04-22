@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TicketAdapter {
 
-    public TicketModel fromRequest(TicketRequest ticketRequest) throws InvalidDataException {
+    public TicketModel fromRequest(final TicketRequest ticketRequest) throws InvalidDataException {
             if(ticketRequest.getLocator() == null) {
                 throw new InvalidDataException("1001", "Locator is required");
             }

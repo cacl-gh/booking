@@ -18,7 +18,7 @@ public class TicketAdapterTest {
 
     @Test
     public void shouldReturnCorrectTicketModel() {
-        TicketRequest ticketRequest = TicketRequest.builder()
+        final TicketRequest ticketRequest = TicketRequest.builder()
                 .locator("4CASAS")
                 .firstName("Miguel")
                 .lastName("Pérez")
@@ -31,7 +31,7 @@ public class TicketAdapterTest {
 
     @Test
     public void shouldThrowInvalidDataExceptionWhenLocatorIsNull() {
-        TicketRequest ticketRequest = TicketRequest.builder()
+        final TicketRequest ticketRequest = TicketRequest.builder()
                 .firstName("Miguel")
                 .lastName("Pérez")
                 .build();
