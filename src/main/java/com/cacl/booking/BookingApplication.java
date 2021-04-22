@@ -27,13 +27,15 @@ public class BookingApplication {
         log.info("Number of tickets: " + ticketList.size());
 
         Ticket ticket = Ticket.builder()
-                .firstName("John")
-                .lastName("Smith")
-                .locator("CJ89UN")
+                .firstName("Marcos")
+                .lastName("SinTierra")
+                .locator("4PU9UN")
                 .build();
         this.ticketRepository.save(ticket);
 
         ticketList = this.ticketRepository.findAll();
-        log.info("Number of tickets: " + ticketList.size());
+        ticketList.stream()
+                .forEach(t -> log.info(t.toString()));
+        log.info("Number of tickets after execution: " + ticketList.size());
     }
 }
