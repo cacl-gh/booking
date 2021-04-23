@@ -1,4 +1,4 @@
-package com.cacl.booking.rest.exception;
+package com.cacl.booking.app.exception;
 
 public class InvalidDataException extends RuntimeException {
 

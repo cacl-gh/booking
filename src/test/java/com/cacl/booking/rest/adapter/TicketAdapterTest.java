@@ -2,19 +2,13 @@ package com.cacl.booking.rest.adapter;
 
 import com.cacl.booking.api.TicketRequest;
 import com.cacl.booking.app.TicketModel;
-import com.cacl.booking.rest.exception.InvalidDataException;
+import com.cacl.booking.app.exception.InvalidDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+class TicketAdapterTest {
 
-@SpringBootTest
-public class TicketAdapterTest {
-
-    @Autowired
-    private TicketAdapter ticketAdapter;
+    private TicketAdapter ticketAdapter = new TicketAdapter();
 
     @Test
     public void shouldReturnCorrectTicketModel() {
@@ -24,9 +18,9 @@ public class TicketAdapterTest {
                 .lastName("Pérez")
                 .build();
         TicketModel ticketModel = ticketAdapter.fromRequest(ticketRequest);
-        assertEquals(ticketRequest.getLocator(), ticketModel.getLocator());
-        assertEquals(ticketRequest.getFirstName(), ticketModel.getFirstName());
-        assertEquals(ticketRequest.getLastName(), ticketModel.getLastName());
+        Assertions.assertEquals(ticketRequest.getLocator(), ticketModel.getLocator());
+        Assertions.assertEquals(ticketRequest.getFirstName(), ticketModel.getFirstName());
+        Assertions.assertEquals(ticketRequest.getLastName(), ticketModel.getLastName());
     }
 
     @Test
