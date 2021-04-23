@@ -1,10 +1,10 @@
 package com.cacl.booking.api;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.ToString;
+import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @ToString
 public class BookingResponse {

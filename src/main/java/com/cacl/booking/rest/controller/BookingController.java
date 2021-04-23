@@ -11,6 +11,7 @@ import com.cacl.booking.rest.exception.Error;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,8 +27,8 @@ public class BookingController {
         this.ticketAdapter = ticketAdapter;
     }
 
-    @PostMapping(value = "/")
-    public BookingResponse bookTicket(final TicketRequest ticketRequest) {
+    @PostMapping(value = "/book")
+    public BookingResponse bookTicket(@RequestBody final TicketRequest ticketRequest) {
         try {
             Long bookingId = bookingService.bookTicket(ticketAdapter.fromRequest(ticketRequest));
             return BookingResponse.builder().bookingId(bookingId).build();

@@ -31,4 +31,14 @@ class TicketAdapterTest {
                 .build();
         Assertions.assertThrows(InvalidDataException.class, () -> ticketAdapter.fromRequest(ticketRequest));
     }
+
+    @Test
+    public void shouldThrowInvalidDataExceptionWhenLocatorIsBlank() {
+        final TicketRequest ticketRequest = TicketRequest.builder()
+                .locator("")
+                .firstName("Miguel")
+                .lastName("Pérez")
+                .build();
+        Assertions.assertThrows(InvalidDataException.class, () -> ticketAdapter.fromRequest(ticketRequest));
+    }
 }
