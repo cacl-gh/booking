@@ -5,7 +5,7 @@ import { Ticket } from '../model/ticket';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class UserService {
+export class TicketService {
 
   private listUrl: string;
   private bookUrl: string;
