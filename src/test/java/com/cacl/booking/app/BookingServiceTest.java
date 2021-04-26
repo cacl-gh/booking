@@ -11,6 +11,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import javax.persistence.QueryTimeoutException;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -50,5 +52,26 @@ class BookingServiceTest {
         when(ticketRepository.save(any(Ticket.class))).thenReturn(ticket);
 
         Assertions.assertEquals(9809080L, bookingService.bookTicket(ticketModel));
+    }
+
+    @Test
+    public void shouldReturnTicketModelList() {
+        final Ticket ticket = new Ticket(997989789L, "3CANTO", "Paco", "Porras");
+        final Ticket ticket2 = new Ticket(997986689L, "4COSAS", "Pepe", "Trola");
+        final List<Ticket> ticketList = Arrays.asList(ticket, ticket2);
+        when(ticketRepository.findAll()).thenReturn(ticketList);
+
+        List<TicketModel> ticketModelList = bookingService.listTickets();
+        for (TicketModel ticketModel: ticketModelList) {
+            Assertions.assertTrue(isTicketModelEqualToTicket(ticketModel, ticketList.get(0)) ||
+                    isTicketModelEqualToTicket(ticketModel, ticketList.get(1)));
+        }
+    }
+
+    private boolean isTicketModelEqualToTicket(TicketModel ticketModel, Ticket ticket) {
+        return (ticketModel.getId().equals(ticket.getId())) &&
+                (ticketModel.getLocator().equals(ticket.getLocator())) &&
+                (ticketModel.getFirstName().equals(ticket.getFirstName())) &&
+                (ticketModel.getLastName().equals(ticket.getLastName()));
     }
 }
