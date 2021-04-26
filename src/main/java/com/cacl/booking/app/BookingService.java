@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -38,11 +39,27 @@ public class BookingService {
         return ticketSaved.getId();
     }
 
+    public List<TicketModel> listTickets() {
+        List<Ticket> ticketList = this.ticketRepository.findAll();
+        return ticketList.stream()
+                .map(this::buildTicketModel)
+                .collect(Collectors.toList());
+    }
+
     private Ticket buildTicket(TicketModel ticketModel) {
         return Ticket.builder()
                 .locator(ticketModel.getLocator())
                 .firstName(ticketModel.getFirstName())
                 .lastName(ticketModel.getLastName())
+                .build();
+    }
+
+    private TicketModel buildTicketModel(Ticket ticket) {
+        return TicketModel.builder()
+                .id(ticket.getId())
+                .locator(ticket.getLocator())
+                .firstName(ticket.getFirstName())
+                .lastName(ticket.getLastName())
                 .build();
     }
 }
