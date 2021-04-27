@@ -16,7 +16,7 @@ export class TicketFormComponent {
     private route: ActivatedRoute,
     private router: Router,
     private ticketService: TicketService) {
-    this.ticket = new Ticket();
+    this.ticket = {};
   }
 
   onSubmit() {

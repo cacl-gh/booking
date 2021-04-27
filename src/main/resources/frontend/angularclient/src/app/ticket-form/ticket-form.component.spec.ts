@@ -1,6 +1,5 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TicketFormComponent } from './ticket-form.component';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 describe('TicketFormComponent', () => {
   let component: TicketFormComponent;

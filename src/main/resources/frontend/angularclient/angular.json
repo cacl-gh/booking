@@ -65,7 +65,9 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angularclient:build"
+            "port": 8081,
+            "browserTarget": "angularclient:build",
+            "proxyConfig": "angular.proxy.js"
           },
           "configurations": {
             "production": {

@@ -1,25 +1,23 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Ticket } from '../model/ticket';
-// @ts-ignore
-import { Observable } from 'rxjs/Observable';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class TicketService {
 
-  private listUrl: string;
-  private bookUrl: string;
+  private static readonly LIST_URL = environment.baseApi + '/list';
+  private static readonly BOOK_URL = environment.baseApi + '/book';
 
   constructor(private http: HttpClient) {
-    this.listUrl = 'http://localhost:8080/list';
-    this.bookUrl = 'http://localhost:8080/book';
   }
 
   public findAll(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(this.listUrl);
+    return this.http.get<Ticket[]>(TicketService.LIST_URL);
   }
 
   public save(user: Ticket) {
-    return this.http.post<Ticket>(this.bookUrl, user);
+    return this.http.post<Ticket>(TicketService.BOOK_URL, user);
   }
 }
