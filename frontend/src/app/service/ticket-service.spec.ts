@@ -1,4 +1,4 @@
-import { TicketService } from './ticket-service.service';
+import { TicketService } from './ticket-service';
 import { TestBed } from '@angular/core/testing';
 
 describe('TicketServiceService', () => {

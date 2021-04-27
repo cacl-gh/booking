@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { TicketFormComponent } from './ticket-form/ticket-form.component';
-import { TicketService } from './service/ticket-service.service';
+import { TicketService } from './service/ticket-service';
 
 @NgModule({
   declarations: [

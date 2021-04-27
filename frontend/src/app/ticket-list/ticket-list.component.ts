@@ -1,5 +1,5 @@
 import { Ticket } from '../model/ticket';
-import { TicketService } from '../service/ticket-service.service';
+import { TicketService } from '../service/ticket-service';
 import { Component, OnInit } from '@angular/core';
 import { filter, map } from 'rxjs/operators';
 

@@ -17,7 +17,7 @@ export class TicketService {
     return this.http.get<Ticket[]>(TicketService.LIST_URL);
   }
 
-  public save(user: Ticket) {
-    return this.http.post<Ticket>(TicketService.BOOK_URL, user);
+  public save(ticket: Ticket) {
+    return this.http.post<Ticket>(TicketService.BOOK_URL, ticket);
   }
 }
