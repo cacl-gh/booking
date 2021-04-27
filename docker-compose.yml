@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  db:
+    image: 'postgres:13.2-alpine'
+    container_name: db
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=booking
+      - POSTGRES_PASSWORD=booking
+    ports:
+      - "5452:5432"
+
+  app:
+    image: 'docker-booking:latest'
+    build: src/main/docker
+    container_name: app
+    ports:
+      - "8080:8080"
+    links:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=booking
+      - SPRING_DATASOURCE_PASSWORD=booking
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  frontend:
+    image: 'docker-booking-front:latest'
+    build: frontend
+    container_name: frontend
+    ports:
+      - "8081:8081"
+    links:
+      - app
+
