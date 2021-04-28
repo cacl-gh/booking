@@ -24,6 +24,6 @@ export class TicketFormComponent {
   }
 
   gotoTicketList() {
-    this.router.navigate(['/tickets']);
+    this.router.navigate(['/list']);
   }
 }
