@@ -1,7 +1,11 @@
 FROM node:12.7-alpine AS build
-WORKDIR /src/app
+WORKDIR /usr/src/app
 COPY package.json ./
-RUN npm install -g @angular/cli@1.7.4
+RUN npm install
 COPY . .
-EXPOSE 8081
-RUN ng serve --open
+RUN npm run build
+
+FROM nginx:1.17.1-alpine
+COPY default.conf /etc/nginx/default.conf
+COPY --from=build /usr/src/app/dist/frontend /usr/share/nginx/html
+EXPOSE 80
