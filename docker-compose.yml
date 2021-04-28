@@ -27,7 +27,7 @@ services:
 
   frontend:
     image: 'docker-booking-front:latest'
-    build: frontend
+    build: ./frontend
     container_name: frontend
     ports:
       - "80:80"
