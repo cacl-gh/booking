@@ -11,10 +11,10 @@ services:
     ports:
       - "5452:5432"
 
-  app:
+  api:
     image: 'docker-booking:latest'
     build: src/main/docker
-    container_name: app
+    container_name: api
     ports:
       - "8080:8080"
     links:
@@ -30,7 +30,7 @@ services:
     build: frontend
     container_name: frontend
     ports:
-      - "80:80"
+      - "8081:80"
     links:
-      - app
+      - api
 

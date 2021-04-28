@@ -11,13 +11,10 @@ import com.cacl.booking.rest.exception.ApiException;
 import com.cacl.booking.rest.exception.Error;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("api")
 @CrossOrigin(origins = "http://localhost:8081")
 @Slf4j
 public class BookingController {
@@ -31,7 +28,7 @@ public class BookingController {
         this.ticketAdapter = ticketAdapter;
     }
 
-    @PostMapping(value = "/bookings")
+    @PostMapping(value = "bookings")
     public BookingResponse bookTicket(@RequestBody final TicketRequest ticketRequest) {
         try {
             Long bookingId = bookingService.bookTicket(ticketAdapter.fromRequest(ticketRequest));
@@ -47,7 +44,7 @@ public class BookingController {
         }
     }
 
-    @GetMapping(value = "/bookings")
+    @GetMapping(value = "bookings")
     public TicketListResponse listTickets() {
         try {
             return ticketAdapter.toResponse(bookingService.listTickets());
