@@ -4,8 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 
 const routes: Routes = [
-  { path: 'tickets', component: TicketListComponent },
-  { path: 'book', component: TicketFormComponent }
+  { path: 'getBookings', component: TicketListComponent },
+  { path: 'postBookings', component: TicketFormComponent }
 ];
 
 @NgModule({

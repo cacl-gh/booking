@@ -31,7 +31,7 @@ public class BookingController {
         this.ticketAdapter = ticketAdapter;
     }
 
-    @PostMapping(value = "/book")
+    @PostMapping(value = "/bookings")
     public BookingResponse bookTicket(@RequestBody final TicketRequest ticketRequest) {
         try {
             Long bookingId = bookingService.bookTicket(ticketAdapter.fromRequest(ticketRequest));
@@ -47,7 +47,7 @@ public class BookingController {
         }
     }
 
-    @GetMapping(value = "/list")
+    @GetMapping(value = "/bookings")
     public TicketListResponse listTickets() {
         try {
             return ticketAdapter.toResponse(bookingService.listTickets());

@@ -7,17 +7,16 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class TicketService {
 
-  private static readonly LIST_URL = environment.baseApi + '/list';
-  private static readonly BOOK_URL = environment.baseApi + '/book';
+  private static readonly BOOKING_URL = environment.baseApi + '/bookings';
 
   constructor(private http: HttpClient) {
   }
 
   public findAll(): Observable<Ticket[]> {
-    return this.http.get<Ticket[]>(TicketService.LIST_URL);
+    return this.http.get<Ticket[]>(TicketService.BOOKING_URL);
   }
 
   public save(ticket: Ticket) {
-    return this.http.post<Ticket>(TicketService.BOOK_URL, ticket);
+    return this.http.post<Ticket>(TicketService.BOOKING_URL, ticket);
   }
 }
