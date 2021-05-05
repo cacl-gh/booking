@@ -19,10 +19,12 @@ export class TicketFormComponent {
     this.ticket = {};
   }
 
+  // tslint:disable-next-line:typedef
   onSubmit() {
-    this.ticketService.save(this.ticket).subscribe(result => this.gotoTicketList());
+    this.ticketService.save(this.ticket).subscribe(() => this.gotoTicketList());
   }
 
+  // tslint:disable-next-line:typedef
   gotoTicketList() {
     this.router.navigate(['/getBookings']);
   }

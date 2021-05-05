@@ -1,5 +1,5 @@
 export interface Ticket {
-  id?: number;
+  bookingId?: number;
   locator?: string;
   firstName?: string;
   lastName?: string;

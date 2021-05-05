@@ -1,12 +1,14 @@
 package com.cacl.booking.rest.adapter;
 
-import com.cacl.booking.api.TicketListResponse;
-import com.cacl.booking.api.TicketRequest;
-import com.cacl.booking.api.TicketResponse;
+import com.cacl.booking.api.*;
 import com.cacl.booking.app.TicketModel;
 import com.cacl.booking.app.exception.InvalidDataException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,6 +50,24 @@ class TicketAdapterTest {
     }
 
     @Test
+    public void shouldThrowInvalidDataExceptionWhenIdIsNull() {
+        final TicketUpdateRequest ticketUpdateRequest = new TicketUpdateRequest(null, "0890808", "Cristina", "Vázquez");
+
+        Assertions.assertThrows(InvalidDataException.class, () -> ticketAdapter.fromUpdateRequest(ticketUpdateRequest));
+    }
+
+    @Test
+    public void shouldReturnCorrectTicketModelWithId() {
+        final TicketUpdateRequest ticketUpdateRequest = new TicketUpdateRequest(95555L, "0890808", "Cristina", "Vázquez");
+
+        TicketModel ticketModel = ticketAdapter.fromUpdateRequest(ticketUpdateRequest);
+        Assertions.assertEquals(ticketUpdateRequest.getId(), ticketModel.getId());
+        Assertions.assertEquals(ticketUpdateRequest.getLocator(), ticketModel.getLocator());
+        Assertions.assertEquals(ticketUpdateRequest.getFirstName(), ticketModel.getFirstName());
+        Assertions.assertEquals(ticketUpdateRequest.getLastName(), ticketModel.getLastName());
+    }
+
+    @Test
     public void shouldReturnCorrectTicketListResponse() {
         final TicketModel ticketModel = TicketModel.builder()
                 .id(96009640L)
@@ -66,6 +86,32 @@ class TicketAdapterTest {
         TicketListResponse ticketListResponse = ticketAdapter.toResponse(ticketModelList);
         Assertions.assertEquals(2, ticketListResponse.getTickets().size());
         for (TicketResponse ticketResponse: ticketListResponse.getTickets()) {
+            Assertions.assertTrue(isResponseEqualToModel(ticketResponse, ticketModelList.get(0)) ||
+                    isResponseEqualToModel(ticketResponse, ticketModelList.get(1)));
+        }
+    }
+
+    @Test
+    public void shouldReturnCorrectTicketPaginatedResponse() {
+        final TicketModel ticketModel = TicketModel.builder()
+                .id(96009640L)
+                .locator("8WUHI7")
+                .firstName("Enrique")
+                .lastName("Eldelavaca")
+                .build();
+        final TicketModel ticketModel2 = TicketModel.builder()
+                .id(96779640L)
+                .locator("9WUHI7")
+                .firstName("Juan")
+                .lastName("Sintierra")
+                .build();
+        final List<TicketModel> ticketModelList = Arrays.asList(ticketModel, ticketModel2);
+        Pageable pageable = PageRequest.of(0, 2);
+        Page<TicketModel> page = new PageImpl<TicketModel>(ticketModelList, pageable, 2);
+
+        TicketPaginatedResponse pageTicketResponse = ticketAdapter.toPaginatedResponse(page);
+        Assertions.assertEquals(2, pageTicketResponse.getTotalItems());
+        for (TicketResponse ticketResponse: pageTicketResponse.getTickets()) {
             Assertions.assertTrue(isResponseEqualToModel(ticketResponse, ticketModelList.get(0)) ||
                     isResponseEqualToModel(ticketResponse, ticketModelList.get(1)));
         }

@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "ticket")
@@ -23,4 +24,8 @@ public class Ticket {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @Column(name = "updated_on")
+    private LocalDateTime updatedOn;
+    @Column(name = "deleted_on")
+    private LocalDateTime deletedOn;
 }
